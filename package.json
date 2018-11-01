@@ -1,0 +1,31 @@
+{
+  "name": "monthly-membership-email-text-generator",
+  "version": "1.0.0",
+  "description": "generates monthly menbership email based on a template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator.git"
+  },
+  "keywords": [
+    "membership",
+    "email",
+    "template",
+    "rates",
+    "crypto"
+  ],
+  "author": "Tomas Kanocz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator/issues"
+  },
+  "homepage": "https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator#readme",
+  "dependencies": {
+    "node-html-parser": "^1.1.10",
+    "request": "^2.88.0",
+    "sanctuary": "^0.15.0"
+  }
+}
