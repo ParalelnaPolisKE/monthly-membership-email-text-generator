@@ -3,6 +3,7 @@
 const parser = require('node-html-parser').parse;
 const request = require('request');
 const S = require('sanctuary');
+const config = require('config');
 
 const querySelector = selector => element => element.querySelector(selector);
 const querySelectorAll = selector => element => element.querySelectorAll(selector);
@@ -21,17 +22,11 @@ const average = list => {
 }
 const url = 'https://freecurrencyrates.com/en/exchange-rate-history/BTC-EUR/2018/blockchain';
 const repo = 'https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator';
-const addresses = {
-  'member1': 'address',
-  'member2': 'address',
-  'member3': 'address',
-  'member4': 'address',
-  '...': 'address'
-};
+const addresses = config.get('addresses');
 const satoshisInBtc = 100000000;
 const roundBtc = num => Math.round(num*satoshisInBtc)/satoshisInBtc;
-const period = 'oktober 2018';
-const membershipFee = 100000000000000;
+const period = config.get('period');
+const membershipFee = config.get('membershipFee');
 const generateImport = addresses => S.reduce
   (acc => name => {
     const address = S.prop(name)(addresses);
@@ -48,7 +43,8 @@ const template = average =>
   obdobie: ${period}
   skript repo: ${repo}\n
   Prosim poslat na dolu uvedene adresy:\n
-${JSON.stringify(addresses, null, 2)}\n
+${JSON.stringify(addresses, null, 2)}
+  \n
   import pre bitcoind watch only addresy:\n
 ${generateImport(addresses)}
 `

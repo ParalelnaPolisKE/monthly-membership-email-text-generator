@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator#readme",
   "dependencies": {
+    "config": "^2.0.1",
     "node-html-parser": "^1.1.10",
     "request": "^2.88.0",
     "sanctuary": "^0.15.0"
