@@ -48,8 +48,7 @@ const template = average =>
   obdobie: ${period}
   skript repo: ${repo}\n
   Prosim poslat na dolu uvedene adresy:\n
-${JSON.stringify(addresses, null, 2)}
-  \n
+${JSON.stringify(addresses, null, 2)}\n
   import pre bitcoind watch only addresy:\n
 ${generateImport(addresses)}
 `
