@@ -36,7 +36,9 @@ const generateImport = addresses => S.reduce
   (Object.keys(addresses));
 
 const template = average =>
-`Ahojte!\n
+`subject: clenske za ${period} v krypto
+body:
+ Ahojte!\n
   zdroj: ${url}
   priemerna cena: € ${average}
   €${membershipFee} v BTC: ${roundBtc(membershipFee/average)}
