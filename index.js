@@ -55,7 +55,15 @@ request(url, (err, res, body) => {
   const root = parser(body);
   const final = S.pipe([
     querySelectorAll('.one-month-rates'),
-    S.prop('1'), //use if not run on the 1st of month, it omits the month's rates (this month is incomplete, so we ignore it)
+    S.filter (node =>
+      S.pipe([
+        querySelector('.month-header'),
+        rawText,
+        S.test (S.regex ('g') (config.get('searchPattern')))
+      ])(node)
+    ),
+    S.head,
+    S.fromMaybe({}),
     querySelectorAll('.column'),
     S.map(getChildren),
     flattenList,
@@ -64,7 +72,7 @@ request(url, (err, res, body) => {
     S.map(getChildren),
     flattenList,
     S.map(rawText),
-    average
+    average,
   ])(root);
 
   console.log(template (final));
