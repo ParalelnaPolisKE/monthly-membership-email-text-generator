@@ -9,8 +9,8 @@ const querySelector = selector => element => element.querySelector(selector);
 const querySelectorAll = selector => element => element.querySelectorAll(selector);
 const getChildren = parent => parent.childNodes;
 const getRate = parent => parent.querySelector('.one-month-data-rate');
-const flattenList = list => S.reduce(S.concat) ([]) (list);
-const rawText = elem => S.prop('rawText') (elem);
+const flattenList = S.reduce(S.concat) ([]);
+const rawText = S.prop('rawText');
 const average = list => {
   const sum = S.pipe([
     S.map(S.parseFloat),
@@ -20,7 +20,7 @@ const average = list => {
   const length = S.prop('length')(list);
   return Math.round(sum/length*100)/100;//we round to 2 decimals
 }
-const url = 'https://freecurrencyrates.com/en/exchange-rate-history/BTC-EUR/2018/blockchain';
+const url = 'https://freecurrencyrates.com/en/exchange-rate-history/BTC-EUR/2019/blockchain';
 const repo = 'https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator';
 const addresses = config.get('addresses');
 const satoshisInBtc = 100000000;
@@ -54,7 +54,8 @@ ${generateImport(addresses)}
 request(url, (err, res, body) => {
   const root = parser(body);
   const final = S.pipe([
-    querySelector('.one-month-rates'),
+    querySelectorAll('.one-month-rates'),
+    S.prop('1'), //use if not run on the 1st of month, it omits the month's rates (this month is incomplete, so we ignore it)
     querySelectorAll('.column'),
     S.map(getChildren),
     flattenList,
