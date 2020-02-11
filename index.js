@@ -20,7 +20,8 @@ const average = list => {
   const length = S.prop('length')(list);
   return Math.round(sum/length*100)/100;//we round to 2 decimals
 }
-const url = 'https://freecurrencyrates.com/en/exchange-rate-history/BTC-EUR/2019/blockchain';
+const year = S.splitOn('.')(config.get('searchPattern'))[1];
+const url = `https://freecurrencyrates.com/en/exchange-rate-history/BTC-EUR/${year}/blockchain`;
 const repo = 'https://github.com/ParalelnaPolisKE/monthly-membership-email-text-generator';
 const addresses = config.get('addresses');
 const satoshisInBtc = 100000000;
